@@ -1,0 +1,41 @@
+{% extends "layout/profile.html" %}
+
+{% block content %}
+<h3 class="mt-5 mb-5">Add recipient</h3>
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-4">
+        <form action="{{url_for('recipient.create')}}"
+              method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" class="form-control {{ 'is-invalid' if form.name.errors else '' }}"
+                       type="text" name="name" value="{{ form.name.data if form.name.data else '' }}">
+                {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" class="form-control {{ 'is-invalid' if form.email.errors else '' }}"
+                       type="text" name="email" value="{{ form.email.data if form.email.data else '' }}">
+                {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="state">State</label>
+                <select name="state" id="state" class="custom-select">
+                    <option value="1" selected>active</option>
+                    <option value="0">not active</option>
+                </select>
+            </div>
+            {{ form.csrf_token }}
+            <button class="btn btn-default" type="submit" id="submit-button">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

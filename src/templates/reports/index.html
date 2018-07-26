@@ -1,0 +1,19 @@
+{% extends "layout/profile.html" %}
+
+{% block content %}
+<h3 class="mt-5 mb-5">Reports</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <h5>Form submission</h5>
+        <canvas id="PieChart"></canvas>
+    </div>
+    <div class="col-md-6">
+        <h5>Form submission this month</h5>
+        <canvas id="BarChart"></canvas>
+    </div>
+</div>
+<script type="text/javascript">
+    var campaign_id = {{campaign_id}}
+</script>
+{% endblock %}

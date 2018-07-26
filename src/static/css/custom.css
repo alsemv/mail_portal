@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'Icons';
+  src: url('../fonts/open-iconic.eot');
+  src: url('../fonts/open-iconic.eot?#iconic-sm') format('embedded-opentype'), url('../fonts/open-iconic.woff') format('woff'), url('../fonts/open-iconic.ttf') format('truetype'), url('../fonts/open-iconic.otf') format('opentype'), url('../fonts/open-iconic.svg#iconic-sm') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+table.dataTable{
+    border-collapse: collapse !important;
+}
+
+a{
+    outline: none;
+}
+
+/*---- sidebar style ----*/
+
+#sidebar {
+    min-height: calc(100vh - 130px);
+    background: #f8f8f8;;
+    color: #000;
+    transition: all 0.3s;
+}
+
+.main-wrapp{
+    min-height: calc(100vh - 130px);
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    font-family: 'Icons';
+    content: "\e037";
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    font-size: 0.6em;
+}
+
+a[aria-expanded="true"]::before {
+    content: '\e034';
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #724443;
+    color: #fff;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+}
+
+#sidebar ul.components > li{
+    border-bottom: 1px solid #e7e7e7;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    text-decoration: none;
+    color: #734442
+}
+#sidebar ul li a:hover {
+    color: #fff;
+    background: #976969;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff !important;
+    background: #976969;
+}
+
+#sidebar ul ul a{
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+}
+
+.wrap-footer {
+    font-size: 11px;
+    letter-spacing: 0.13em;
+    font-family: "PT Sans", Arial, sans-serif;
+    padding: 10px 50px;
+    line-height: 30px;
+}
+.clear:before{
+    content: '';
+    display: table;
+}
+
+.clear:after{
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.wrap-footer .pull-left {
+    float: left;
+}
+.wrap-footer .pull-right {
+    float: right;
+}

@@ -1,0 +1,33 @@
+{% extends "layout/profile.html" %}
+
+{% block content %}
+<h3 class="mt-5 mb-5">Import recipient</h3>
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-4">
+        {% with messages = get_flashed_messages(category_filter=["success_import"]) %}
+        {% if messages %}
+
+        {% for message in messages %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% endfor %}
+
+        {% endif %}
+        {% endwith %}
+        <form action="{{url_for('campaign.recipient_import')}}"
+              method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Import csv file</label>
+                <input id="file" class="form-control {{ 'is-invalid' if form.file.errors else '' }}"
+                       type="file" name="file" value="{{ form.file.data if form.file.data else '' }}">
+                {% if form.file.errors %}
+                {% for error in form.file.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {{ form.csrf_token }}
+            <button class="btn btn-default" type="submit" id="submit-button">Upload</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

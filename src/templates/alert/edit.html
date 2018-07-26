@@ -1,0 +1,29 @@
+{% extends "layout/profile.html" %}
+
+{% block content %}
+<h3 class="mt-5 mb-5">Edit alert</h3>
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-2">
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="reminder_interval">Remind interval</label>
+                <select name="reminder_interval" id="reminder_interval" class="form-control">
+                    {% for day in days %}
+                    <option value="{{day}}" {% if alert.reminder_interval==day %} selected='selected' {% endif %}>{{day}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="update_interval">Update interval</label>
+                <select name="update_interval" id="update_interval" class="form-control">
+                    {% for day in days %}
+                    <option value="{{day}}" {% if alert.update_interval==day %} selected='selected' {% endif %}>{{day}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {{ form.csrf_token }}
+            <button class="btn btn-default" type="submit" id="submit-button">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

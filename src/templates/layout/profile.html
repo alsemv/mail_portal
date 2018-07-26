@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}"/>
+    <title>Profile</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" title="Home"><img src="/static/image/logo.png" alt=""></a>
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Sign up</a></li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Sign In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div id="sidebar" class="col-md-2 pl-0 pr-0">
+            <nav>
+                <div class="sidebar-header">
+                    <h5>Dashboard</h5>
+                </div>
+                <ul class="list-unstyled components">
+                    <li>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Recipients</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li><a href="{{ url_for('recipient.index') }}">Recipients list</a></li>
+                            <li><a href="{{ url_for('recipient.create') }}">Add new recipient</a></li>
+                        </ul>
+                        <a href="#reposrts" data-toggle="collapse" aria-expanded="false">Reports</a>
+                        <ul class="collapse list-unstyled" id="reposrts">
+                            {% for item in campaigns_list() %}
+                            <li><a href="{{url_for('reports.all_report', campaign_id=item.id)}}">Campaign {{item.id}}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <a href="#campaign" data-toggle="collapse" aria-expanded="false">Campaign</a>
+                        <ul class="collapse list-unstyled" id="campaign">
+                            <li><a href="{{ url_for('campaign.recipient_import') }}">Import Recipients</a></li>
+                        </ul>
+                        <a href="#alerts" data-toggle="collapse" aria-expanded="false">Alerts</a>
+                        <ul class="collapse list-unstyled" id="alerts">
+                            {% for item in campaigns_list() %}
+                            <li><a href="{{url_for('alert.edit', alert_id=item.alert.id)}}">Alert {{item.alert.id}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-10">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<div class="wrap-footer">
+    <div class="container clear">
+        <div class="pull-left ">Cantine Riunite &amp; CIV S.C.Agr. - Via Brodolini, 24 - 42040 Campegine (RE) - tel:
+            +39.0522.905711 - fax: +39.0522.905777</div>
+        <div class="pull-right "><img
+                src="http://www.riunite.it/wp-content/themes/riunite/img/riunite/riunite-civ-logo.png"
+                alt="Riunite&amp;CIV"></div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/custom.js')}}"></script>
+</body>
+</html>

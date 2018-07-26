@@ -1,0 +1,52 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-4">
+        <form action="{{url_for('form.store_form_data', campaign_id=campaign_id, recipient_id=recipient_id)}}" method="post">
+            <div class="form-group">
+                <label for="responsible">Responsible</label>
+                <input id="responsible" class="form-control {{ 'is-invalid' if form.responsible.errors else '' }}"
+                       type="text" name="responsible" value="{{ form.responsible.data if form.responsible.data else '' }}">
+                {% if form.responsible.errors %}
+                {% for error in form.responsible.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="business_unit">Business unit</label>
+                <input id="business_unit" class="form-control {{ 'is-invalid' if form.business_unit.errors else '' }}"
+                       type="text" name="business_unit" value="{{ form.business_unit.data if form.business_unit.data else '' }}">
+                {% if form.business_unit.errors %}
+                {% for error in form.business_unit.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="product_year">Product per year</label>
+                <input id="product_year" class="form-control {{ 'is-invalid' if form.product_per_year.errors else '' }}"
+                       type="text" name="product_per_year" value="{{ form.product_per_year.data if form.product_per_year.data else '' }}">
+                {% if form.product_per_year.errors %}
+                {% for error in form.product_per_year.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input id="address" class="form-control {{ 'is-invalid' if form.address.errors else '' }}" type="text"
+                       name="address" value="{{ form.address.data if form.address.data else '' }}">
+                {% if form.address.errors %}
+                {% for error in form.address.errors %}
+                <span class="invalid-feedback"><strong>{{ error }}</strong></span>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {{ form.csrf_token }}
+            <button class="btn btn-default" type="submit" id="submit-button">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
